@@ -16,12 +16,12 @@ Prepare data
 
 Create Engineered columns from existing data
 upset
-rating_difference
-game_rating
-lower_rated_white
-time_control_group
+Contract Type
+Payment Type
+Internet Service type
 
-Explore data in search of drivers of upsets
+
+Explore data in search of drivers of Churn
 - What featues may lead to the rate of churn? 
 - Do monthy charges impact churn? 
 - Does being a senior citizen impact who churned? If it does, do I need to change my strategy of imputation? (in other words, do those assumptions have big impact)
@@ -41,8 +41,25 @@ Draw conclusions
 
 Data Dictionary 
 
+| Feature      | Definition             |  
+|--------------|------------------------|
+| Contract Type | month to month, one year, or two year|
+| Payment Type      | mailed check, Electronic Check, Credit Card, Bank Transfer |
+
+
 Steps to reporduce 
 
+- Clone this repo.
+- Acquire the data from MySql
+- Put the data in the file containing the cloned repo.
+- Run notebook.
+
 Key take aways and conclusions 
+- Get customers on one to two year plans to 
+- Update customer payment type and promot auto pay
+- Run promotions to upgrade existing customers internet service 
+
 
 Reccomendations 
+To increase the skill intensity of a game add to the length of time players are able to consider their moves
+Based on the data longer time controls make it less likely for a less skilled player to beat a more skilled player
