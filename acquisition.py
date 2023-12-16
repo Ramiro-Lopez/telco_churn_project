@@ -5,12 +5,33 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-########################################### main acquire function #######################################################
+##################################################################################################
 def get_db_url(db, user, password, host):
+    '''
+    This function takes in 4 arguments
+    Database, Username, Password, and host
+    this information will be stored as a url
+    and the function will return the url
+    '''
     url = f'mysql+pymysql://{user}:{password}@{host}/{db}'
     return(url)
 
+##################################################################################################
+
 def get_telco_data(file_name="telco_churn.csv") -> pd.DataFrame:
+    '''
+    This fuction has 1 argument being file name
+    file name by default is a csv file called telco_churn 
+    using os the we can check to see if that file exists
+    if it does exist:
+        pandas will read the file
+        pandas will return the file 
+    if the file does not exist:
+        pandas will take the query provided (SQL)
+        pandas will extablish a connection using url from previous function
+        in order to extract the data request and create the csv file
+        will return the file 
+    '''
     if os.path.isfile(file_name):
         return pd.read_csv(file_name)
     query = """SELECT *
@@ -31,6 +52,8 @@ def get_telco_data(file_name="telco_churn.csv") -> pd.DataFrame:
 def prep_telco(df):
     df = df.drop(columns=['internet_service_type_id', 'contract_type_id', 'payment_type_id'])
     df['internet_service_type'] = df['internet_service_type'].fillna('No internet service')
+    df['payment_type'] = df['payment_type'].str.replace(' (automatic)', '', regex=False)
+
 
     df['gender_encoded'] = df.gender.map({'Female': 1, 'Male': 0})
     df['partner_encoded'] = df.partner.map({'Yes': 1, 'No': 0})
