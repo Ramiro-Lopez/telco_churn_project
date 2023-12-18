@@ -50,6 +50,18 @@ def get_telco_data(file_name="telco_churn.csv") -> pd.DataFrame:
 ########################################### prep telco function #######################################################
 
 def prep_telco(df):
+    '''
+    takes in 1 aregument (telco_churn data)
+    drops duplicate columns 
+    fills in all NA values inside internet service type 
+    cleans up values inside payment_type 
+    encodes all binary categorical variables 
+    creates dummy variables df for all other categorical variables
+    concat original df with dummy df
+    change dtype of total charges to float 
+    replace all empty space inside total_charges with 0 
+    returns cleaned df   
+    '''
     df = df.drop(columns=['internet_service_type_id', 'contract_type_id', 'payment_type_id'])
     df['internet_service_type'] = df['internet_service_type'].fillna('No internet service')
     df['payment_type'] = df['payment_type'].str.replace(' (automatic)', '', regex=False)
@@ -90,3 +102,8 @@ def split_telco_data(df):
         random_state=123,
         stratify=train_validate.internet_service_type)
     return train, validate, test
+
+def show_split(train, validate, test):
+    print(f'train -> {train.shape}')
+    print(f'validate -> {validate.shape}')
+    print(f'test -> {test.shape}')
